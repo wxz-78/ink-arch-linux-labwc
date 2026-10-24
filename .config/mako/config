@@ -1,0 +1,53 @@
+# Ink — mako. Notificaciones como tarjetas redondas.
+font=JetBrainsMono Nerd Font 11
+format=<b>%s</b>\n%b
+width=340
+height=140
+# arriba: 6 (margen) + 34 (altura) de waybar + 10 de aire → no tapa la isla derecha
+margin=50,12,10
+padding=14,16
+border-size=1
+border-radius=16
+max-visible=4
+max-history=30
+icons=1
+max-icon-size=40
+icon-path=/usr/share/icons/Papirus-Dark:/usr/share/icons/hicolor
+default-timeout=6000
+layer=overlay
+anchor=top-right
+group-by=app-name
+
+on-button-left=invoke-default-action
+on-button-middle=dismiss-all
+on-button-right=dismiss
+
+background-color=#111111ee
+text-color=#e8e8e8
+border-color=#ffffff2e
+progress-color=over #ffffff30
+
+[urgency=low]
+text-color=#9a9a9a
+default-timeout=3000
+
+# Urgentes: invertidas (papel sobre tinta), sin color y sin caducar
+[urgency=high]
+background-color=#ececec
+text-color=#0a0a0a
+border-color=#ffffff
+progress-color=over #0a0a0a22
+default-timeout=0
+
+# Barra de volumen/brillo (script osd), abajo al centro
+[category=osd]
+format=%s
+anchor=bottom-center
+margin=0,0,70,0
+width=280
+height=80
+default-timeout=1200
+group-by=category
+
+[mode=dnd]
+invisible=1

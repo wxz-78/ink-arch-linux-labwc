@@ -1,0 +1,36 @@
+# Ink — swaylock. Lienzo negro liso (sin imagen: no hay nada que pueda fallar).
+daemonize
+ignore-empty-password
+show-failed-attempts
+
+color=0a0a0a
+font=JetBrainsMono Nerd Font
+font-size=22
+
+indicator-idle-visible
+indicator-radius=90
+indicator-thickness=6
+
+inside-color=0a0a0aff
+ring-color=ffffff30
+line-color=00000000
+separator-color=00000000
+text-color=e8e8e8
+
+key-hl-color=ffffff
+bs-hl-color=6e6e6e
+inside-ver-color=0a0a0aff
+ring-ver-color=ffffff90
+text-ver-color=e8e8e8
+
+# Contraseña incorrecta: el anillo se invierte (blanco)
+inside-wrong-color=ececec
+ring-wrong-color=ffffff
+text-wrong-color=0a0a0a
+
+inside-clear-color=0a0a0aff
+ring-clear-color=6e6e6e
+text-clear-color=e8e8e8
+inside-caps-lock-color=0a0a0aff
+ring-caps-lock-color=ffffff90
+text-caps-lock-color=e8e8e8

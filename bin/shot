@@ -1,0 +1,29 @@
+#!/bin/sh
+# shot — capturas con aviso. Uso: shot full | area | clip | edit  (edit abre el área en swappy para anotar)
+dir=$(xdg-user-dir PICTURES 2>/dev/null); [ -n "$dir" ] || dir="$HOME/Pictures"
+mkdir -p "$dir"
+f="$dir/captura-$(date +%Y%m%d-%H%M%S).png"
+
+# swappy lee save_dir de su config y lo pasa por wordexp; si no es un directorio
+# existente lo crea (te deja un ~/Pictures fantasma). Se lo fijamos aquí con la
+# ruta real de Imágenes para que la captura editada acabe donde las demás.
+swappy_save_dir() {
+    conf="${XDG_CONFIG_HOME:-$HOME/.config}/swappy/config"
+    [ -f "$conf" ] || return 0
+    grep -qx "save_dir=$1" "$conf" 2>/dev/null && return 0
+    tmp="$conf.ink.$$"
+    { grep -v '^save_dir=' "$conf" 2>/dev/null || true; printf 'save_dir=%s\n' "$1"; } > "$tmp" 2>/dev/null || { rm -f "$tmp"; return 0; }
+    mv "$tmp" "$conf" 2>/dev/null || rm -f "$tmp"
+}
+
+case "$1" in
+    full) grim "$f" ;;
+    area) g=$(slurp) || exit 0; grim -g "$g" "$f" ;;
+    clip) g=$(slurp) || exit 0; grim -g "$g" - | wl-copy
+          notify-send -u low -t 2000 "󰄀  Captura copiada"; exit 0 ;;
+    edit) command -v swappy >/dev/null || { notify-send -u normal "swappy no está instalado" "sudo pacman -S swappy"; exit 1; }
+          swappy_save_dir "$dir"
+          g=$(slurp) || exit 0; grim -g "$g" - | swappy -f -; exit 0 ;;
+    *) echo "uso: shot full|area|clip|edit" >&2; exit 1 ;;
+esac
+[ -f "$f" ] && { wl-copy < "$f"; notify-send -u low -t 3000 -i "$f" "󰄀  Captura guardada" "$(basename "$f")"; }

@@ -1,0 +1,58 @@
+# Ink — tema de labwc (formato openbox-3). Solo grises: lienzo negro, trazo blanco.
+# Redondeo: <cornerRadius> en rc.xml.
+
+border.width: 1
+window.titlebar.padding.width: 12
+window.titlebar.padding.height: 8
+window.label.text.justify: Center
+
+window.active.border.color: #2e2e2e
+window.inactive.border.color: #1a1a1a
+window.active.title.bg.color: #121212
+window.inactive.title.bg.color: #0c0c0c
+window.active.label.text.color: #ececec
+window.inactive.label.text.color: #666666
+
+window.button.width: 22
+window.button.height: 22
+window.button.spacing: 8
+window.button.hover.bg.color: #ffffff1f
+window.button.hover.bg.corner-radius: 11
+
+window.active.button.unpressed.image.color: #8a8a8a
+window.active.button.hover.image.color: #ffffff
+window.inactive.button.unpressed.image.color: #444444
+
+window.active.shadow.size: 36
+window.inactive.shadow.size: 20
+window.active.shadow.color: #00000099
+window.inactive.shadow.color: #00000055
+
+menu.border.width: 1
+menu.border.color: #2e2e2e
+menu.width.min: 180
+menu.items.padding.x: 14
+menu.items.padding.y: 8
+menu.items.bg.color: #121212
+menu.items.text.color: #dcdcdc
+menu.items.active.bg.color: #ececec
+menu.items.active.text.color: #0a0a0a
+menu.separator.color: #2e2e2e
+menu.separator.padding.width: 10
+menu.separator.padding.height: 4
+menu.title.bg.color: #121212
+menu.title.text.color: #ffffff
+
+osd.bg.color: #0a0a0aea
+osd.border.color: #3a3a3a
+osd.border.width: 1
+osd.label.text.color: #ececec
+osd.window-switcher.style-classic.item.active.bg.color: #ffffff22
+osd.window-switcher.style-classic.item.active.border.color: #ececec
+osd.workspace-switcher.boxes.width: 18
+osd.workspace-switcher.boxes.height: 18
+
+snapping.overlay.edge.bg.color: #ffffff18
+snapping.overlay.region.bg.color: #ffffff18
+snapping.overlay.edge.border.color: #ececec
+snapping.overlay.region.border.color: #ececec

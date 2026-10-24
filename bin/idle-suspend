@@ -1,0 +1,16 @@
+#!/bin/sh
+# idle-suspend — suspende solo si el equipo va con batería (no corta descargas en AC).
+# Sin batería propia (PC de escritorio) no suspende nunca. Se ignoran las baterías de periféricos
+# (ratón, teclado, mando: scope=Device) y se cuenta como corriente cualquier fuente conectada
+# (Mains, USB, USB-C PD…).
+has_bat=0
+for d in /sys/class/power_supply/*; do
+    [ -r "$d/type" ] || continue
+    [ "$(cat "$d/scope" 2>/dev/null)" = Device ] && continue
+    case "$(cat "$d/type")" in
+        Battery) has_bat=1 ;;
+        *)       [ "$(cat "$d/online" 2>/dev/null)" = 1 ] && exit 0 ;;
+    esac
+done
+[ "$has_bat" = 1 ] || exit 0
+exec systemctl suspend

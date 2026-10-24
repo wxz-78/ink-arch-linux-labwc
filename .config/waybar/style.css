@@ -1,0 +1,68 @@
+/* Ink — waybar. Tres «islas» flotantes translúcidas (izquierda · centro · derecha), solo grises. */
+* {
+    font-family: "JetBrainsMono Nerd Font", monospace;
+    font-size: 13px;
+    border: none;
+    border-radius: 0;
+    min-height: 0;
+}
+
+/* La barra en sí es transparente: el fondo lo ponen las islas */
+window#waybar { background: transparent; color: #e8e8e8; }
+
+.modules-left, .modules-center, .modules-right {
+    background: rgba(10, 10, 10, 0.78);
+    border: 1px solid rgba(255, 255, 255, 0.10);
+    border-radius: 18px;
+    padding: 0 4px;
+}
+.modules-left  { margin-right: 6px; }
+.modules-right { margin-left: 6px; }
+
+#custom-logo, #taskbar button, #clock, #tray, #idle_inhibitor, #custom-dnd, #bluetooth,
+#network, #pulseaudio, #backlight, #battery, #custom-power {
+    margin: 3px 1px;
+    padding: 0 10px;
+    border-radius: 14px;
+    background: transparent;
+    color: #e8e8e8;
+    transition: background 140ms ease-in-out, color 140ms ease-in-out;
+}
+
+#custom-logo { font-size: 17px; padding: 0 13px 0 11px; }
+
+#taskbar button { padding: 0 8px; color: #8a8a8a; }
+#taskbar button.active { background: rgba(255, 255, 255, 0.14); }
+
+#custom-logo:hover, #taskbar button:hover, #idle_inhibitor:hover, #custom-dnd:hover,
+#bluetooth:hover, #network:hover, #pulseaudio:hover, #backlight:hover, #battery:hover,
+#custom-power:hover, #clock:hover {
+    background: rgba(255, 255, 255, 0.10);
+}
+
+#clock { letter-spacing: 0.3px; }
+
+/* Estados apagados: gris tenue */
+#idle_inhibitor.deactivated, #custom-dnd.off, #network.disconnected,
+#bluetooth.off, #bluetooth.disabled, #pulseaudio.muted {
+    color: #5c5c5c;
+}
+
+/* Estados activos: píldora invertida (papel sobre tinta) */
+#idle_inhibitor.activated, #custom-dnd.on { background: #ececec; color: #0a0a0a; }
+
+/* Sin color de alerta: la batería baja parpadea */
+#battery.warning:not(.charging) { color: #b4b4b4; }
+#battery.critical:not(.charging) { animation: parpadeo 1.4s ease-in-out infinite; }
+@keyframes parpadeo { 50% { opacity: 0.3; } }
+
+menu, tooltip {
+    background: rgba(16, 16, 16, 0.97);
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    border-radius: 12px;
+    color: #e8e8e8;
+}
+menu { padding: 4px; }
+menuitem { padding: 4px 10px; border-radius: 8px; background: transparent; }
+menuitem:hover { background: #ececec; color: #0a0a0a; }
+tooltip label { color: #e8e8e8; padding: 4px 6px; }
