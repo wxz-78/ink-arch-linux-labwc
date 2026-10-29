@@ -1,0 +1,110 @@
+{
+    "layer": "top",
+    "position": "top",
+    "height": 38,
+    "margin-top": 8,
+    "margin-left": 14,
+    "margin-right": 14,
+    "spacing": 4,
+    "reload_style_on_change": true,
+
+    "modules-left": ["custom/logo", "wlr/taskbar"],
+    "modules-center": ["clock"],
+    "modules-right": ["tray", "idle_inhibitor", "custom/dnd", "bluetooth", "network", "pulseaudio", "backlight", "battery", "custom/power"],
+
+    "custom/logo": {
+        "format": "\uf303",
+        "tooltip": false,
+        "on-click": "pkill -x fuzzel || fuzzel"
+    },
+
+    "wlr/taskbar": {
+        "format": "{icon}",
+        "icon-size": 18,
+        "icon-theme": "Papirus-Dark",
+        "tooltip-format": "{title}",
+        "on-click": "activate",
+        "on-click-middle": "close"
+    },
+
+    "clock": {
+        "format": "{:%H:%M  ·  %a %d %b}",
+        "tooltip-format": "<tt>{calendar}</tt>",
+        "calendar": { "mode": "month" }
+    },
+
+    "tray": { "icon-size": 16, "spacing": 10 },
+
+    "idle_inhibitor": {
+        "format": "{icon}",
+        "format-icons": { "activated": "󰅶", "deactivated": "󰾪" },
+        "tooltip-format-activated": "pantalla siempre encendida",
+        "tooltip-format-deactivated": "reposo normal"
+    },
+
+    "custom/dnd": {
+        "exec": "dnd status",
+        "return-type": "json",
+        "interval": "once",
+        "on-click": "dnd toggle"
+    },
+
+    "bluetooth": {
+        "format": "󰂯",
+        "format-off": "󰂲",
+        "format-disabled": "󰂲",
+        "format-no-controller": "",
+        "format-connected": "󰂱 {num_connections}",
+        "tooltip-format": "{status}",
+        "tooltip-format-connected": "{device_enumerate}",
+        "tooltip-format-enumerate-connected": "{device_alias}",
+        "on-click": "foot -e bluetui",
+        "on-click-right": "rfkill toggle bluetooth"
+    },
+
+    "network": {
+        "format-wifi": "{icon}",
+        "format-ethernet": "󰈀",
+        "format-disconnected": "󰖪",
+        "format-icons": ["󰤟", "󰤢", "󰤥", "󰤨"],
+        "tooltip-format-wifi": "{essid} · {signalStrength}%",
+        "tooltip-format-ethernet": "{ifname} · {ipaddr}",
+        "tooltip-format-disconnected": "sin conexión",
+        "on-click": "foot -e nmtui"
+    },
+
+    "pulseaudio": {
+        "format": "{icon}",
+        "format-muted": "󰝟",
+        "format-icons": { "default": ["󰕿", "󰖀", "󰕾"] },
+        "tooltip-format": "{desc} · {volume}%",
+        "on-click": "foot -e wiremix",
+        "on-click-right": "osd vol-mute",
+        "on-scroll-up": "osd vol-up",
+        "on-scroll-down": "osd vol-down"
+    },
+
+    "backlight": {
+        "format": "{icon}",
+        "format-icons": ["󰃞", "󰃟", "󰃠"],
+        "tooltip-format": "brillo · {percent}%",
+        "on-scroll-up": "osd bri-up",
+        "on-scroll-down": "osd bri-down"
+    },
+
+    "battery": {
+        "format": "{icon} {capacity}%",
+        "format-charging": "󰂄 {capacity}%",
+        "format-plugged": "󰚥 {capacity}%",
+        "format-full": "󰁹 {capacity}%",
+        "format-icons": ["󰁺", "󰁼", "󰁾", "󰂀", "󰁹"],
+        "tooltip-format": "{timeTo}",
+        "states": { "warning": 30, "critical": 15 }
+    },
+
+    "custom/power": {
+        "format": "󰐥",
+        "tooltip": false,
+        "on-click": "power-menu"
+    }
+}

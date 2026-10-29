@@ -1,0 +1,19 @@
+#!/bin/sh
+# power-menu — menú de sesión con fuzzel (mismo estilo que el lanzador).
+pkill -x fuzzel && exit 0
+
+confirm() {  # $1 = acción; evita apagar/reiniciar por un clic accidental
+    [ "$(printf '%s\n' "󰄬  Sí, $1" "󰜺  Cancelar" |
+        fuzzel --dmenu --index --lines 2 --width 24 --prompt "  ")" = 0 ]
+}
+
+choice=$(printf '%s\n' \
+    "󰌾  Bloquear" "󰤄  Suspender" "󰍃  Cerrar sesión" "󰜉  Reiniciar" "󰐥  Apagar" |
+    fuzzel --dmenu --index --lines 5 --width 24 --prompt "  ")
+case "$choice" in
+    0) lock ;;
+    1) systemctl suspend ;;
+    2) confirm "cerrar sesión" && labwc --exit ;;
+    3) confirm "reiniciar"     && systemctl reboot ;;
+    4) confirm "apagar"        && systemctl poweroff ;;
+esac

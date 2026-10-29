@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<labwc_config>
+
+  <core>
+    <gap>10</gap>
+    <adaptiveSync>no</adaptiveSync>
+    <reuseOutputMode>yes</reuseOutputMode>
+  </core>
+
+  <theme>
+    <!-- ~/.local/share/themes/Ink/labwc/themerc -->
+    <name>Ink</name>
+    <!-- Esquinas redondas tipo macOS -->
+    <cornerRadius>14</cornerRadius>
+    <dropShadows>yes</dropShadows>
+    <!-- Botones a la izquierda; el título queda centrado. -->
+    <titlebar>
+      <layout>close,iconify,max:</layout>
+    </titlebar>
+    <font>
+      <name>JetBrainsMono Nerd Font</name>
+      <size>10</size>
+    </font>
+    <font place="ActiveWindow">
+      <name>JetBrainsMono Nerd Font</name>
+      <size>10</size>
+      <weight>bold</weight>
+    </font>
+  </theme>
+
+  <placement>
+    <policy>center</policy>
+  </placement>
+
+  <!-- Foco por clic; la ventana enfocada sube al frente -->
+  <focus>
+    <followMouse>no</followMouse>
+    <raiseOnFocus>yes</raiseOnFocus>
+  </focus>
+
+  <snapping>
+    <!-- inner/outer: distancia (px) al borde para ajustar la ventana; sustituye al antiguo <range>10</range> -->
+    <range inner="10" outer="10"/>
+    <topMaximize>yes</topMaximize>
+  </snapping>
+
+  <resize>
+    <popupShow>Nonpixel</popupShow>
+  </resize>
+
+  <!-- Picture-in-Picture del navegador: sin entrada en la barra de tareas ni en Alt-Tab -->
+  <windowRules>
+    <windowRule title="Picture*in*picture" skipTaskbar="yes" skipWindowSwitcher="yes"/>
+  </windowRules>
+
+  <!-- labwc >= 0.9.3: show/style van dentro de <osd>; allWorkspaces ahora es workspace="current|all" en NextWindow -->
+  <windowSwitcher preview="yes" outlines="yes">
+    <osd show="yes" style="classic"/>
+  </windowSwitcher>
+
+  <desktops number="4">
+    <popupTime>600</popupTime>
+  </desktops>
+
+  <libinput>
+    <device category="touchpad">
+      <tap>yes</tap>
+      <tapAndDrag>yes</tapAndDrag>
+      <naturalScroll>yes</naturalScroll>
+      <disableWhileTyping>yes</disableWhileTyping>
+      <clickMethod>clickfinger</clickMethod>
+    </device>
+  </libinput>
+
+  <keyboard>
+    <repeatRate>30</repeatRate>
+    <repeatDelay>300</repeatDelay>
+    <default/>
+
+    <!-- Apps -->
+    <keybind key="W-Return"><action name="Execute"><command>foot</command></action></keybind>
+    <keybind key="W-d"><action name="Execute"><command>fuzzel</command></action></keybind>
+    <keybind key="W-b"><action name="Execute"><command>helium-browser</command></action></keybind>
+    <keybind key="W-S-b"><action name="Execute"><command>helium-browser --incognito</command></action></keybind>
+    <keybind key="W-e"><action name="Execute"><command>foot -e yazi</command></action></keybind>
+    <keybind key="W-v"><action name="Execute"><command>sh -c 'cliphist list | fuzzel --dmenu | cliphist decode | wl-copy'</command></action></keybind>
+    <keybind key="C-S-Escape"><action name="Execute"><command>foot -e btop</command></action></keybind>
+
+    <!-- Sesión -->
+    <keybind key="W-S-l"><action name="Execute"><command>lock</command></action></keybind>
+    <keybind key="W-Escape"><action name="Execute"><command>power-menu</command></action></keybind>
+
+    <!-- Notificaciones: W-n = No molestar, W-S-n = descartar todas -->
+    <keybind key="W-n"><action name="Execute"><command>dnd toggle</command></action></keybind>
+    <keybind key="W-S-n"><action name="Execute"><command>makoctl dismiss --all</command></action></keybind>
+
+    <!-- Capturas: pantalla completa / área / área al portapapeles -->
+    <keybind key="Print"><action name="Execute"><command>shot full</command></action></keybind>
+    <keybind key="S-Print"><action name="Execute"><command>shot area</command></action></keybind>
+    <keybind key="C-Print"><action name="Execute"><command>shot clip</command></action></keybind>
+    <keybind key="W-Print"><action name="Execute"><command>shot edit</command></action></keybind>
+
+    <!-- Grabación de pantalla: W-S-p inicia wf-recorder; vuelve a pulsar para detenerlo -->
+    <keybind key="W-S-p"><action name="Execute"><command>sh -c 'if pgrep -x wf-recorder >/dev/null; then pkill -INT -x wf-recorder; else mkdir -p "$HOME/Videos"; wf-recorder -f "$HOME/Videos/grabacion-$(date +%Y%m%d-%H%M%S).mp4"; fi'</command></action></keybind>
+
+    <!-- Volumen y brillo (script osd → notificación con barra); también con la pantalla bloqueada -->
+    <keybind key="XF86AudioRaiseVolume" allowWhenLocked="yes"><action name="Execute"><command>osd vol-up</command></action></keybind>
+    <keybind key="XF86AudioLowerVolume" allowWhenLocked="yes"><action name="Execute"><command>osd vol-down</command></action></keybind>
+    <keybind key="XF86AudioMute" allowWhenLocked="yes"><action name="Execute"><command>osd vol-mute</command></action></keybind>
+    <keybind key="XF86AudioMicMute" allowWhenLocked="yes"><action name="Execute"><command>osd mic-mute</command></action></keybind>
+    <keybind key="XF86MonBrightnessUp" allowWhenLocked="yes"><action name="Execute"><command>osd bri-up</command></action></keybind>
+    <keybind key="XF86MonBrightnessDown" allowWhenLocked="yes"><action name="Execute"><command>osd bri-down</command></action></keybind>
+
+    <!-- Multimedia (playerctl: mpv con mpris, navegador, etc.) -->
+    <keybind key="XF86AudioPlay" allowWhenLocked="yes"><action name="Execute"><command>playerctl play-pause</command></action></keybind>
+    <keybind key="XF86AudioNext" allowWhenLocked="yes"><action name="Execute"><command>playerctl next</command></action></keybind>
+    <keybind key="XF86AudioPrev" allowWhenLocked="yes"><action name="Execute"><command>playerctl previous</command></action></keybind>
+
+    <!-- Ventanas -->
+    <keybind key="W-q"><action name="Close"/></keybind>
+    <keybind key="A-Tab"><action name="NextWindow" workspace="current"/></keybind>
+    <keybind key="A-S-Tab"><action name="PreviousWindow" workspace="current"/></keybind>
+    <keybind key="W-Tab"><action name="NextWindow" workspace="current"/></keybind>
+    <keybind key="W-m"><action name="Iconify"/></keybind>
+    <keybind key="W-f"><action name="ToggleMaximize"/></keybind>
+    <keybind key="W-S-f"><action name="ToggleFullscreen"/></keybind>
+    <keybind key="W-h"><action name="SnapToEdge"><direction>left</direction></action></keybind>
+    <keybind key="W-l"><action name="SnapToEdge"><direction>right</direction></action></keybind>
+    <keybind key="W-k"><action name="SnapToEdge"><direction>up</direction></action></keybind>
+    <keybind key="W-j"><action name="SnapToEdge"><direction>down</direction></action></keybind>
+
+    <!-- Escritorios: W-1..4 va, W-S-1..4 envía la ventana -->
+    <keybind key="W-1"><action name="GoToDesktop"><to>1</to></action></keybind>
+    <keybind key="W-2"><action name="GoToDesktop"><to>2</to></action></keybind>
+    <keybind key="W-3"><action name="GoToDesktop"><to>3</to></action></keybind>
+    <keybind key="W-4"><action name="GoToDesktop"><to>4</to></action></keybind>
+    <keybind key="W-S-1"><action name="SendToDesktop"><to>1</to><follow>no</follow></action></keybind>
+    <keybind key="W-S-2"><action name="SendToDesktop"><to>2</to><follow>no</follow></action></keybind>
+    <keybind key="W-S-3"><action name="SendToDesktop"><to>3</to><follow>no</follow></action></keybind>
+    <keybind key="W-S-4"><action name="SendToDesktop"><to>4</to><follow>no</follow></action></keybind>
+
+    <keybind key="W-S-r"><action name="Reconfigure"/></keybind>
+  </keyboard>
+
+  <mouse>
+    <default/>
+    <context name="Root">
+      <mousebind button="Right" action="Press">
+        <action name="ShowMenu"><menu>root-menu</menu></action>
+      </mousebind>
+    </context>
+  </mouse>
+
+</labwc_config>

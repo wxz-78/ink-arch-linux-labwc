@@ -1,0 +1,143 @@
+/* Ink — waybar. Islas flotantes tipo macOS, translúcidas con sombra sutil. */
+* {
+    font-family: "JetBrainsMono Nerd Font", monospace;
+    font-size: 13px;
+    border: none;
+    border-radius: 0;
+    min-height: 0;
+}
+
+window#waybar {
+    background: transparent;
+    color: #f5f5f5;
+}
+
+.modules-left,
+.modules-center,
+.modules-right {
+    background: radial-gradient(circle at top, rgba(38, 38, 38, 0.9), rgba(10, 10, 10, 0.82));
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    border-radius: 999px;
+    padding: 0 6px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.38);
+}
+
+.modules-left  { margin-right: 8px; }
+.modules-right { margin-left: 8px; }
+
+#custom-logo,
+#taskbar button,
+#clock,
+#tray,
+#idle_inhibitor,
+#custom-dnd,
+#bluetooth,
+#network,
+#pulseaudio,
+#backlight,
+#battery,
+#custom-power {
+    margin: 4px 2px;
+    padding: 0 12px;
+    border-radius: 999px;
+    background: transparent;
+    color: #f5f5f5;
+    transition: background 160ms ease-in-out, color 160ms ease-in-out;
+}
+
+#custom-logo {
+    font-size: 17px;
+    padding: 0 16px 0 14px;
+}
+
+#taskbar button {
+    padding: 0 10px;
+    color: rgba(245, 245, 245, 0.5);
+}
+
+#taskbar button.active {
+    background: rgba(255, 255, 255, 0.16);
+    color: #f5f5f5;
+}
+
+#custom-logo:hover,
+#taskbar button:hover,
+#idle_inhibitor:hover,
+#custom-dnd:hover,
+#bluetooth:hover,
+#network:hover,
+#pulseaudio:hover,
+#backlight:hover,
+#battery:hover,
+#custom-power:hover,
+#clock:hover {
+    background: rgba(255, 255, 255, 0.12);
+    color: #ffffff;
+}
+
+#clock {
+    letter-spacing: 0.4px;
+    font-weight: 500;
+}
+
+/* Estados apagados: gris tenue */
+#idle_inhibitor.deactivated,
+#custom-dnd.off,
+#network.disconnected,
+#bluetooth.off,
+#bluetooth.disabled,
+#pulseaudio.muted {
+    color: rgba(245, 245, 245, 0.38);
+}
+
+/* Estados activos: píldora invertida */
+#idle_inhibitor.activated,
+#custom-dnd.on {
+    background: linear-gradient(180deg, #f7f7f7 0%, #e6e6e6 100%);
+    color: #101010;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.9);
+}
+
+/* Batería */
+#battery.warning:not(.charging) {
+    color: #d9d9d9;
+}
+
+#battery.critical:not(.charging) {
+    animation: parpadeo 1.4s ease-in-out infinite;
+}
+
+@keyframes parpadeo {
+    50% {
+        opacity: 0.32;
+    }
+}
+
+menu,
+tooltip {
+    background: radial-gradient(circle at top, rgba(42, 42, 42, 0.98), rgba(14, 14, 14, 0.98));
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    border-radius: 14px;
+    color: #f5f5f5;
+    box-shadow: 0 18px 60px rgba(0, 0, 0, 0.5);
+}
+
+menu {
+    padding: 6px;
+}
+
+menuitem {
+    padding: 6px 12px;
+    border-radius: 10px;
+    background: transparent;
+}
+
+menuitem:hover {
+    background: linear-gradient(180deg, #f7f7f7 0%, #e6e6e6 100%);
+    color: #101010;
+}
+
+tooltip label {
+    color: #f5f5f5;
+    padding: 6px 8px;
+}

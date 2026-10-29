@@ -1,0 +1,50 @@
+#!/bin/sh
+# ~/.config/labwc/autostart — se ejecuta una vez al iniciar sesión (con `sh`).
+# Sin servicios de systemd de usuario: todo se lanza aquí, es lo más simple de leer y depurar.
+
+# run PROG [args…]: lanza en segundo plano solo si el programa existe (un paquete que falte no rompe la sesión)
+run() { command -v "$1" >/dev/null 2>&1 && "$@" >/dev/null 2>&1 & }
+
+# Variables que necesitan los portales XDG y los servicios D-Bus (solo las justas)
+dbus-update-activation-environment --systemd \
+  WAYLAND_DISPLAY XDG_CURRENT_DESKTOP XDG_SESSION_TYPE XCURSOR_THEME XCURSOR_SIZE
+
+# Tema de apps GTK/libadwaita (en segundo plano: no retrasa el arranque del escritorio)
+(
+  gs() { gsettings set org.gnome.desktop.interface "$@"; }
+  gs color-scheme 'prefer-dark'
+  gs gtk-theme 'adw-gtk3-dark'
+  gs icon-theme 'Papirus-Dark'
+  gs cursor-theme 'phinger-cursors-light'
+  gs font-name 'JetBrainsMono Nerd Font 10'
+  gs monospace-font-name 'JetBrainsMono Nerd Font 10'
+) >/dev/null 2>&1 &
+
+# Monitores: labwc usa el modo preferido de cada pantalla. Para escala o posición,
+# mira los nombres con `wlr-randr` y descomenta/ajusta (ejemplos):
+#wlr-randr --output eDP-1 --scale 1.25
+#wlr-randr --output HDMI-A-1 --pos 1920,0 --mode 1920x1080
+
+# Fondo: el primero que exista (3.jpeg, luego 4.jpeg). Si no hay ninguno, negro liso.
+bg=""
+for f in "$HOME"/.local/share/backgrounds/[34].jpeg; do [ -f "$f" ] && { bg=$f; break; }; done
+if [ -n "$bg" ]; then run swaybg -i "$bg" -m fill -c 0a0a0a; else run swaybg -c 0a0a0a; fi
+
+run mako
+run waybar
+
+# Agente polkit (pide contraseña para montar discos, etc.)
+run /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
+
+# Historial del portapapeles (texto e imágenes)
+run wl-paste --type text --watch cliphist store
+run wl-paste --type image --watch cliphist store
+
+# Inactividad: 5 min bloquea · 5:30 apaga la pantalla (wlopm, si existe) · 15 min suspende (solo con batería).
+# Un solo swayidle; `lock` evita bloquear dos veces. Respeta el botón «pantalla siempre encendida» de waybar.
+set -- -w timeout 300 lock
+if command -v wlopm >/dev/null 2>&1; then
+  set -- "$@" timeout 330 "wlopm --off '*'" resume "wlopm --on '*'"
+fi
+set -- "$@" timeout 900 idle-suspend before-sleep lock after-resume "wlopm --on '*'" lock lock
+run swayidle "$@"

@@ -1,0 +1,14 @@
+{
+    "logo": { "type": "small", "color": { "1": "white" }, "padding": { "right": 3 } },
+    "display": { "separator": "  ", "color": { "keys": "white", "title": "white" }, "key": { "width": 8 } },
+    "modules": [
+        "title", "separator",
+        { "type": "os", "key": "os" },
+        { "type": "kernel", "key": "kernel" },
+        { "type": "wm", "key": "wm" },
+        { "type": "shell", "key": "shell" },
+        { "type": "memory", "key": "ram" },
+        { "type": "battery", "key": "bat" },
+        { "type": "uptime", "key": "up" }
+    ]
+}

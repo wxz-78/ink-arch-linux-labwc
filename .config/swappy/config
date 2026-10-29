@@ -1,0 +1,13 @@
+# Ink — swappy (editor de capturas). Se abre con W-Print; guarda en Imágenes con el mismo nombre que `shot`.
+# save_dir con '~' (swappy expande la ruta con wordexp). `shot edit` lo reescribe con la
+# ruta real de Imágenes (xdg-user-dir PICTURES) antes de abrir swappy.
+[Default]
+save_dir=~/Pictures
+save_filename_format=captura-%Y%m%d-%H%M%S.png
+show_panel=false
+line_size=4
+text_size=20
+text_font=JetBrainsMono Nerd Font
+paint_mode=brush
+early_exit=true
+fill_shape=false

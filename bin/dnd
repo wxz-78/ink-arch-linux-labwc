@@ -1,0 +1,13 @@
+#!/bin/sh
+# dnd — «No molestar» de mako.  Uso: dnd toggle | dnd status (JSON para waybar)
+# Waybar solo atiende SIGUSR1 (mostrar/ocultar barra), SIGUSR2 (recargar) y
+# SIGINT: las señales RTMIN+n se ignoran. SIGUSR2 recarga el panel, que vuelve
+# a ejecutar el módulo «once» (custom/dnd) y actualiza el indicador.
+case "$1" in
+    toggle) makoctl mode -t dnd >/dev/null 2>&1; pkill -USR2 -x waybar ;;
+    status) case "$(makoctl mode 2>/dev/null)" in
+                *dnd*) echo '{"text":"󰂛","class":"on","tooltip":"No molestar: activado"}' ;;
+                *)     echo '{"text":"󰂚","class":"off","tooltip":"No molestar: apagado"}' ;;
+            esac ;;
+    *) echo "uso: dnd toggle|status" >&2; exit 1 ;;
+esac
