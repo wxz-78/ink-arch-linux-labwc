@@ -1,0 +1,26 @@
+# ~/.config/labwc/environment — KEY=VALUE, una por línea (labwc expande $VAR y ~).
+# No definas XDG_RUNTIME_DIR ni LIBSEAT_BACKEND: elogind (greetd) ya lo resuelve.
+# Sin comentarios al final de línea (labwc no los admite) y sin asignaciones recursivas (FOO=$FOO:x).
+XDG_CURRENT_DESKTOP=labwc:wlroots
+XDG_SESSION_TYPE=wayland
+XDG_SESSION_DESKTOP=labwc
+
+# Teclado (cambia a tu distribución)
+XKB_DEFAULT_LAYOUT=latam
+XKB_DEFAULT_VARIANT=deadtilde
+
+# Cursor
+XCURSOR_THEME=phinger-cursors-light
+XCURSOR_SIZE=24
+
+# Toolkits en Wayland nativo, con XWayland de respaldo.
+# (SDL, Firefox y Chromium ya detectan Wayland solos: no hace falta forzarlos.)
+GDK_BACKEND=wayland,x11
+QT_QPA_PLATFORM=wayland;xcb
+# Apps Qt en oscuro (paquete adwaita-qt6; si no está instalado, Qt usa su estilo por defecto)
+QT_STYLE_OVERRIDE=Adwaita-Dark
+QT_WAYLAND_DISABLE_WINDOWDECORATION=1
+ELECTRON_OZONE_PLATFORM_HINT=auto
+
+# Solo si labwc no arranca en tu GPU:
+# WLR_RENDERER=pixman

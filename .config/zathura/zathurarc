@@ -1,0 +1,30 @@
+# Ink — zathura. Papel negro, tinta blanca (Ctrl+r alterna los colores originales del PDF).
+set font                    "JetBrainsMono Nerd Font 10"
+set guioptions              "s"
+set selection-clipboard     clipboard
+set adjust-open             best-fit
+set page-padding            8
+
+set recolor                 true
+set recolor-keephue         false
+set recolor-lightcolor      "#0a0a0a"
+set recolor-darkcolor       "#e4e4e4"
+
+set default-bg              "#0a0a0a"
+set default-fg              "#e4e4e4"
+set statusbar-bg            "#141414"
+set statusbar-fg            "#c8c8c8"
+set inputbar-bg             "#141414"
+set inputbar-fg             "#e4e4e4"
+set notification-bg         "#141414"
+set notification-fg         "#e4e4e4"
+set notification-error-bg   "#ececec"
+set notification-error-fg   "#0a0a0a"
+set notification-warning-bg "#ececec"
+set notification-warning-fg "#0a0a0a"
+set highlight-color         "#ffffff55"
+set highlight-active-color  "#ffffff99"
+set completion-bg           "#141414"
+set completion-fg           "#9a9a9a"
+set completion-highlight-bg "#ececec"
+set completion-highlight-fg "#0a0a0a"

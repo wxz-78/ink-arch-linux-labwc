@@ -1,0 +1,58 @@
+# Ink — tema de labwc. Inspirado en ventanas macOS, minimalista en grises.
+# Redondeo: <cornerRadius> en rc.xml.
+
+border.width: 1
+window.titlebar.padding.width: 16
+window.titlebar.padding.height: 9
+window.label.text.justify: Center
+
+window.active.border.color: #3a3a3a
+window.inactive.border.color: #1f1f1f
+window.active.title.bg.color: #151515
+window.inactive.title.bg.color: #101010
+window.active.label.text.color: #f5f5f5
+window.inactive.label.text.color: #6f6f6f
+
+window.button.width: 24
+window.button.height: 24
+window.button.spacing: 10
+window.button.hover.bg.color: #ffffff24
+window.button.hover.bg.corner-radius: 12
+
+window.active.button.unpressed.image.color: #9a9a9a
+window.active.button.hover.image.color: #ffffff
+window.inactive.button.unpressed.image.color: #4a4a4a
+
+window.active.shadow.size: 44
+window.inactive.shadow.size: 24
+window.active.shadow.color: #000000b3
+window.inactive.shadow.color: #00000066
+
+menu.border.width: 1
+menu.border.color: #3a3a3a
+menu.width.min: 200
+menu.items.padding.x: 16
+menu.items.padding.y: 9
+menu.items.bg.color: #141414f5
+menu.items.text.color: #e6e6e6
+menu.items.active.bg.color: #f5f5f5
+menu.items.active.text.color: #101010
+menu.separator.color: #2f2f2f
+menu.separator.padding.width: 12
+menu.separator.padding.height: 6
+menu.title.bg.color: #141414f5
+menu.title.text.color: #ffffff
+
+osd.bg.color: #141414ee
+osd.border.color: #ffffff1f
+osd.border.width: 1
+osd.label.text.color: #f5f5f5
+osd.window-switcher.style-classic.item.active.bg.color: #ffffff26
+osd.window-switcher.style-classic.item.active.border.color: #f5f5f5
+osd.workspace-switcher.boxes.width: 20
+osd.workspace-switcher.boxes.height: 20
+
+snapping.overlay.edge.bg.color: #ffffff26
+snapping.overlay.region.bg.color: #ffffff22
+snapping.overlay.edge.border.color: #f5f5f5
+snapping.overlay.region.border.color: #f5f5f5

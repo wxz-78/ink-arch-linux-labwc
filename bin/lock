@@ -1,0 +1,3 @@
+#!/bin/sh
+# lock — bloquea la pantalla una sola vez (evita lanzar swaylock dos veces).
+pgrep -x swaylock >/dev/null || exec swaylock -f

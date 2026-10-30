@@ -1,0 +1,33 @@
+#!/bin/sh
+# osd — cambia volumen/brillo y lo muestra como notificación con barra (mako).
+# Uso: osd vol-up|vol-down|vol-mute|mic-mute|bri-up|bri-down
+SINK=@DEFAULT_AUDIO_SINK@
+SRC=@DEFAULT_AUDIO_SOURCE@
+
+show() {  # $1 = texto, $2 = 0-100
+    notify-send -u low -c osd -t 1200 \
+        -h string:x-canonical-private-synchronous:osd \
+        -h int:value:"$2" "$1"
+}
+vol() {   # volumen en %, 0 si está en mute (una sola llamada a wpctl)
+    set -- $(wpctl get-volume "$1")          # «Volume: 0.29» o «Volume: 0.29 [MUTED]»
+    case "$*" in
+        *MUTED*) echo 0 ;;
+        *) echo "$2" | awk '{printf "%d", $1*100+0.5}' ;;
+    esac
+}
+bri() {   # $1 = 5%+ | 5%-   (sin pantalla con brillo regulable no hace nada)
+    v=$(brightnessctl -m --min-value=1 set "$1" 2>/dev/null | cut -d, -f4 | tr -d %)
+    [ -n "$v" ] && show "󰃠  Brillo" "$v"
+}
+
+case "$1" in
+    vol-up)   wpctl set-mute "$SINK" 0; wpctl set-volume -l 1.0 "$SINK" 5%+; show "󰕾  Volumen" "$(vol $SINK)" ;;
+    vol-down) wpctl set-volume "$SINK" 5%-; show "󰖀  Volumen" "$(vol $SINK)" ;;
+    vol-mute) wpctl set-mute "$SINK" toggle; show "󰝟  Volumen" "$(vol $SINK)" ;;
+    mic-mute) wpctl set-mute "$SRC" toggle
+              case "$(wpctl get-volume "$SRC")" in *MUTED*) show "󰍭  Micrófono apagado" 0 ;; *) show "󰍬  Micrófono activo" 100 ;; esac ;;
+    bri-up)   bri 5%+ ;;
+    bri-down) bri 5%- ;;
+    *) echo "uso: osd vol-up|vol-down|vol-mute|mic-mute|bri-up|bri-down" >&2; exit 1 ;;
+esac
